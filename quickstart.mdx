@@ -1,86 +1,166 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: 'Object Utils'
+description: 'Here you can find the description of all utility objects in our code'
 ---
-
-## Setup your development
-
-Learn how to update your docs locally and and deploy them to the public.
-
-### Edit and preview
-
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
-
-### Deploy your changes
-
-<AccordionGroup>
-
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
-
-</AccordionGroup>
-
-## Update your docs
-
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
-
-<CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
+### Function: point
+>The point function takes two numbers: x, y and combines them into one object: point
+```java
+point: (x, y) => { return { Rettype: 'point', x, y }}
+```
+### Function: ray
+>The ray function uses two numbers: p1, p2 and direction: dir to draw a ray
+```java
+ray: (p1, p2, dir) => { return { type: 'ray', p1, p2, dir}}
+```
+### Function: line
+>The line function uses two numbers: p1, p2 to draw a line between them
+```java
+line: (p1, p2) => { return { type: 'line', p1, p2 }}
+```
+### Function: circle
+>The circle function uses two numbers: p1, p2 one of them being the center point
+and the second one being a point on the circumference of circle to draw it
+```java
+circle: (p1, p2) => { return { type: 'circle', p1, p2 }}
+```
+### Function: squaredLength
+>The squaredLength Function takes two points and splits them into four numbers
+then it uses the formula to calculate squared distance between them
+```java
+squaredLength: (p1, p2) => {
+        return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)
+    }
+```
+### Function: length
+>The length Function is the square root of squaredLength function, we use it to calculate the distance between two points
+```java
+length: (p1, p2) => {
+        return Math.sqrt(objectUtils.squaredLength(p1, p2))
+    }
+```
+### Function: center
+>The center Function takes two points and splits them into four numbers
+then it uses the formula to calculate the center between them
+```java
+center: (p1, p2) => {
+        return objectUtils.point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2)
+    }
+```
+### Function: intersection
+>The intersection Function takes two objects that intersect with each other: obj which can be line or circle
+and obj2 which can be ray or line to determine which type of intersection is it
+```java
+intersection: function (obj, obj2) {
+        if (obj.type === 'line' && obj2.type === 'ray') {
+            return this.intersection_ray_line(obj, obj2);
+        } else if (obj.type === 'circle') {
+            return this.intersection_line_circle(obj, obj2);
+        }else if (obj.type === 'line' && obj2.type === 'line') {
+            return this.intersection_2line(obj, obj2);
+        }
+    }
+```
+### Function: intersection_ray_line
 >
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
+```java
+intersection_ray_line: (line, ray) => {
+        const x4 = ray.p1.x + ray.dir.x
+        const y4 = ray.p1.y + ray.dir.y
 
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
+        const den = (line.p1.x - line.p2.x) * (ray.p1.y - y4) - (line.p1.y - line.p2.y) * (ray.p1.x - x4)
 
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
+        if (den === 0) return null;
 
-</CardGroup>
+        const t = ((line.p1.x - ray.p1.x) * (ray.p1.y - y4) - (line.p1.y - ray.p1.y) * (ray.p1.x - x4)) / den
+        const u = -((line.p1.x - line.p2.x) * (line.p1.y - ray.p1.y) - (line.p1.y - line.p2.y) * (line.p1.x - ray.p1.x)) / den
+
+        if (t > 0 && t < 1 && u > 0) {
+            return objectUtils.point(line.p1.x + t * (line.p2.x - line.p1.x), line.p1.y + t * (line.p2.y - line.p1.y))
+        }else{
+            return null;
+        }
+    }
+```
+### Function: intersection_2line
+>This function
+```java
+intersection_2line: (line, line2) => {
+
+        const den = (line.p1.x - line.p2.x) * (line2.p1.y - line2.p2.y) - (line.p1.y - line.p2.y) * (line2.p1.x - line2.p2.x)
+
+        if (den === 0) return null;
+
+        const t = ((line.p1.x - line2.p1.x) * (line2.p1.y - line2.p2.y) - (line.p1.y - line2.p1.y) * (line2.p1.x - line2.p2.x)) / den
+
+        return objectUtils.point(line.p1.x + t * (line.p2.x - line.p1.x), line.p1.y + t * (line.p2.y - line.p1.y))
+    }
+```
+### Function: intersection_line_circle
+> This is the function we use to calculate two points, one being the entry point where the ray enters the circle and the second being the exit point where the ray leaves it
+```java
+intersection_line_circle: (line, ray) => {
+        const xa = ray.dir.x
+        const ya = ray.dir.y
+        const cx = line.p1.x;
+        const cy = line.p1.y;
+        const r_sq = objectUtils.squaredLength(line.p1,line.p2)
+
+        const l = Math.sqrt(xa * xa + ya * ya);
+        const ux = xa / l;
+        const uy = ya / l;
+
+        const cu = ((cx - ray.p1.x) * ux + (cy - ray.p1.y) * uy);
+        const px = ray.p1.x + cu * ux;
+        const py = ray.p1.y + cu * uy;
+
+        const d = Math.sqrt(r_sq - (px - cx) * (px - cx) - (py - cy) * (py - cy));
+
+        const p1 = objectUtils.point(px - ux * d, py - uy * d)
+        const p2 = objectUtils.point(px + ux * d, py + uy * d)
+
+        if(d){
+            return {
+                p1: p1,
+                p2: p2,
+            }
+        }
+
+        return null;
+    }
+```
+### Function: perpendicular_bisector
+> smth
+```java
+perpendicular_bisector: function(line) {
+        return objectUtils.line(
+            objectUtils.point(
+                (-line.p1.y + line.p2.y + line.p1.x + line.p2.x) * 0.5,
+                (line.p1.x - line.p2.x + line.p1.y + line.p2.y) * 0.5
+            ),
+            objectUtils.point(
+                (line.p1.y - line.p2.y + line.p1.x + line.p2.x) * 0.5,
+                (-line.p1.x + line.p2.x + line.p1.y + line.p2.y) * 0.5
+            )
+        );
+    }
+```
+### Function: normalize
+> smth
+```java
+normalize(length, p1, p2) {
+        const dir = objectUtils.point(p2.x - p1.x, p2.y - p1.y)
+        const wsp = length / objectUtils.length(p1, p2)
+
+        return objectUtils.point(dir.x * wsp, dir.y * wsp)
+    }
+```
+### Function: getDirFromAngle
+> smth
+```java
+getDirFromAngle(angle) {
+        const radians = angle * (Math.PI / 180);
+
+        return objectUtils.point(Math.cos(radians), Math.sin(radians));
+    }
+```
+
