@@ -1,0 +1,37 @@
+{
+  "$schema": "https://www.realtimecolors.com/?colors=e6e3ed-0f0b16-b4a1d9-43277d-6936d1&fonts=Poppins-Poppins",
+  "name": "Zwariowani Marcina",
+  "logo": {
+    "dark": "/images/ZwMar.png",
+    "light": "/images/ZwMar.png"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#B4A1D9",
+    "light": "#EEEBF5",
+    "dark": "#0F0B16",
+    "anchors": {
+      "from": "#0F0B16",
+      "to": "#EEEBF5"
+    }
+  },
+  "topbarLinks": [],
+  "tabs": [],
+  "anchors": [],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "development"
+      ]},{
+      "group": "Resources",
+      "pages": [
+        "quickstart"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/panu2137"
+  }
+}
