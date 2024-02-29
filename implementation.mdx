@@ -1,0 +1,32 @@
+---
+title: 'Implementation'
+description: 'Here is how to implement the simulator in your own project'
+---
+
+### Initialize
+>
+
+| Property      | Description                           |
+| ------------  |-------------------------------------- |
+| width         | width of canvas                       |
+| height        | height of canvas                      |
+| canvas        | DOM element of first canvas           |
+| lightCanvas   | DOM element of second canvas          |
+
+```javascript
+        const scene = new Scene(
+            document.querySelector('.mainscene').clientWidth,
+            document.querySelector('.mainscene').clientHeight,
+            document.getElementById('canvas'),
+            document.getElementById('light-canvas')
+        );
+```
+
+Canvas must be one above the other to create layers
+
+```html
+          <div class="mainscene">
+              <canvas id="light-canvas"></canvas>
+              <canvas id="canvas"></canvas>
+          </div>
+```

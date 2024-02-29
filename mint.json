@@ -1,15 +1,18 @@
 {
-  "$schema": "https://www.realtimecolors.com/?colors=e6e3ed-0f0b16-b4a1d9-43277d-6936d1&fonts=Poppins-Poppins",
   "name": "Zwariowani Marcina",
   "logo": {
     "dark": "/images/ZwMar.png",
     "light": "/images/ZwMar.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/favicon.png",
   "colors": {
-    "primary": "#B4A1D9",
-    "light": "#EEEBF5",
-    "dark": "#0F0B16",
+    "primary": "#37265e",
+    "light": "#b894ff",
+    "dark": "#b2a1d9",
+    "background": {
+      "light": "#eeebf5",
+      "dark": "#0d0c0f"
+    },
     "anchors": {
       "from": "#0F0B16",
       "to": "#EEEBF5"
@@ -23,17 +26,25 @@
       "group": "Getting Started",
       "pages": [
         "introduction",
-        "development"
+        "development",
+        "customObject"
       ]},{
       "group": "Resources",
       "pages": [
         "quickstart",
         "lineBased",
         "ElementTypes"
+      ]},{
+      "group": "Using in own project",
+      "pages": [
+        "implementation",
+        "resizing",
+        "events",
+        "creatingElements"
       ]
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/panu2137"
+    "github": "https://github.com/granacik320/OpticsSimForMotorola"
   }
 }

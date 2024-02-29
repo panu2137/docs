@@ -1,0 +1,21 @@
+---
+title: 'Events'
+description: 'Here is how to implement events in your own project'
+---
+
+| event            | Description                               |
+| ---------------- |------------------------------------------ |
+| targetChange     | trigger when target was changed           |
+| elementsChange   | trigger when element was added or removed |
+
+### Adding the event listener
+
+```javascript
+    scene.addEvent('elementsChange', () => console.log('elementsChange'));
+```
+
+### Removing the event listener
+
+```javascript
+    scene.removeEvent('elementsChange', () => console.log('elementsChange'));
+```

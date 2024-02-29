@@ -1,0 +1,22 @@
+---
+title: 'Rezise the canvas'
+description: 'Here is how to resize the canvas when the window is resized.'
+---
+
+### Resize
+>
+
+| Property      | Description                           |
+| ------------  |-------------------------------------- |
+| width         | width of canvas                       |
+| height        | height of canvas                      |
+
+
+```javascript
+    window.addEventListener('resize', () => {
+            scene.resize(
+                document.querySelector('.mainscene').clientWidth,
+                document.querySelector('.mainscene').clientHeight
+            );
+    });
+```

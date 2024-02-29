@@ -1,99 +1,19 @@
 ---
-title: 'lineBased'
-description: 'Here is the list of all lineBased functions from element types folder'
+title: 'Drawing a point'
+description: 'Here is how to use the lineBased element'
 ---
-### Function: move
+### Drawing a dot
 >
-```java
-move: (obj, mouse, offset) => {
-        const w = obj.p2.x - obj.p1.x
-        const h = obj.p2.y - obj.p1.y
 
-        obj.p1.x = mouse.x - offset.x
-        obj.p1.y = mouse.y - offset.y
+| Property      | Description                           |
+| ------------  |-------------------------------------- |
+| ctx           | 2D context from your canvas           |
+| pos           | position of the object as a point     |
+| scale         | scene scale                           |
+| testing       | drawing point positions               |
 
-        obj.p2.x = mouse.x - offset.x + w
-        obj.p2.y = mouse.y - offset.y + h
-    },
-```
-### Function: draw
->
-```java
-draw: (ctx, obj, scale = 1) =>  {
-        ctx.strokeStyle = 'rgb(255,255,255)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(obj.p1.x, obj.p1.y);
-        ctx.lineTo(obj.p2.x, obj.p2.y);
-        ctx.stroke();
-
-        if(obj.selected){
-            elementsTypes['layoutDot'].draw(ctx, obj.p1, scale);
-            elementsTypes['layoutDot'].draw(ctx, obj.p2, scale);
-        }
-    },
-```
-### Function: resize
->
-```java
-resize: (obj, mouse, corner) => {
-        if(corner === 'l'){
-            obj.p1.x = mouse.x
-            obj.p1.y = mouse.y
-        }else{
-            obj.p2.x = mouse.x
-            obj.p2.y = mouse.y
-        }
-    },
-```
-### Function: testClick
->
-```java
-testClick: (obj, mouse, scale) => {
-        const a = objectUtils.point(obj.p1.x, obj.p1.y);
-        const b = objectUtils.point(obj.p2.x, obj.p2.y);
-        const c = mouse;
-
-        return elementsTypes['lineBased'].getNearestPoint(obj, mouse, scale) || Math.abs(objectUtils.length(a, b) - (objectUtils.length(a, c) + objectUtils.length(b, c))) < 1;
-    },
-```
-### Function: getNearestPoint
->
-```java
-getNearestPoint: (obj, mouse, scale) => {
-        const delta = 5 / scale;
-        const { x, y } = mouse;
-
-        if (obj.p1.x - delta < x && x < obj.p1.x + delta &&  obj.p1.y - delta < y && y < obj.p1.y + delta){
-            return 'l'
-        }else if (obj.p2.x - delta < x && x < obj.p2.x + delta &&  obj.p2.y - delta < y && y < obj.p2.y + delta){
-            return 'r'
-        }
-    },
-```
-### Function: rayIntersection\
->
-```java
-rayIntersection: (obj, ray) => {
-        return objectUtils.intersection(objectUtils.line(obj.p1, obj.p2), ray)
-    },
-```
-### Function: shot
->
-```java
-shot: (obj, ray, intersection) => {
-        const rx = ray.p1.x - intersection.x;
-        const ry = ray.p1.y - intersection.y;
-        const mx = obj.p2.x - obj.p1.x;
-        const my = obj.p2.y - obj.p1.y;
-
-        const p2 = objectUtils.point(intersection.x + rx * (my * my - mx * mx) - 2 * ry * mx * my, intersection.y + ry * (mx * mx - my * my) - 2 * rx * mx * my)
-        const ray2 = objectUtils.ray(intersection, p2, p2)
-        ray2.brightness_p = ray.brightness_p
-        ray2.brightness_s = ray.brightness_s
-        ray2.wavelength = ray.wavelength;
-
-        return [ray2]
+```javascript
+    draw: (ctx, obj, scale = 1) => {
+            elementsTypes['layoutDot'].draw(ctx, objectUtils.point(100, 100), scale, true);
     }
 ```
-
