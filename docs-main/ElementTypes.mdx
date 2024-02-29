@@ -1,0 +1,106 @@
+---
+title: 'Element types'
+description: 'Here is the list of all the functions from element types folder'
+---
+The code displayed beneath the function name is the code we use to create the objects.
+### Function: mirrorline
+>
+```java
+elementsTypes['mirrorline'] = {
+    create: (mouse) => {
+        return {type: 'mirrorline', p1: mouse, p2: mouse}
+    },
+```
+### Function: voidline
+>
+```java
+elementsTypes['voidline'] = {
+    create: (mouse) => {
+        return {type: 'voidline', p1: mouse, p2: mouse}
+    },
+```
+### Function: rectangle
+>
+```java
+elementsTypes['rectangle'] = {
+    create: (mouse) => {
+        return {type: 'rectangle', p1: mouse, p2: mouse, properties: ["refractiveIndex", "cauchyCoeffient"], refractiveIndex: 1.5}
+    },
+```
+### Function: circle
+>
+```java
+elementsTypes['circle'] = {
+    create: (mouse) => {
+        return {type: 'circle', p1: mouse, p2: mouse, properties: ["refractiveIndex", "cauchyCoeffient"], refractiveIndex: 1.5}
+    },
+```
+### Function: voidcircle
+>
+```java
+elementsTypes['voidcircle'] = {
+    create: (mouse) => {
+        return {type: 'voidcircle', p1: mouse, p2: mouse}
+    },
+```
+### Function: polygon
+>
+```java
+elementsTypes['polygon'] = {
+    create: (mouse) => {
+        return {type: 'polygon', path: [{p: mouse, arc: false}, {p: mouse, arc: false}], creating: true, properties: ["refractiveIndex", "cauchyCoeffient"], refractiveIndex: 1.5}
+    },
+```
+### Function: laser
+>
+```java
+elementsTypes['laser'] = {
+    create: (mouse) => {
+        const p1 = mouse
+        const p2 = objectUtils.point(mouse.x + 100, mouse.y)
+        const dir = objectUtils.point(1, 0)
+        const properties = ["position", "light"]
+
+        return {type: 'laser', p1, p2, dir, properties, wavelength: 380, brightness: 1}
+    },
+```
+### Function: bundle
+>
+```java
+elementsTypes['bundle'] = {
+    create: (mouse) => {
+        const dir = objectUtils.point(1, 0)
+        const properties = ["position", "light"]
+
+        return {type: 'bundle', p1: mouse, p2: mouse, dir, properties, wavelength: 380, brightness: 1}
+    },
+```
+### Function: threesixty
+>
+```java
+elementsTypes['threesixty'] = {
+    create(mouse){
+        const properties = ["position", "light"]
+
+        return {type: 'threesixty', p1: mouse, properties, wavelength: 700, brightness: 1}
+    },
+```
+### Function: arc
+>
+```java
+elementsTypes['arc'] = {
+    create: (mouse) => {
+        return {type: 'arc', path: [{p: mouse}, {p: mouse}]}
+    },
+```
+### Function: lens
+>
+```java
+elementsTypes['lens'] = {
+    create: (mouse) => {
+        const p2 = objectUtils.point(mouse.x, mouse.y + 100)
+        return {type: 'lens', path: [], p1: mouse, p2, creating: false, properties: ["refractiveIndex, cauchyCoeffient"], refractiveIndex: 1.5, curved: 1}
+    },
+```
+
+
