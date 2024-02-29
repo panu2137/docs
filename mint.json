@@ -20,11 +20,16 @@
   "anchors": [],
   "navigation": [
     {
-      "group": "Motorola Science Cup project",
+      "group": "Getting Started",
       "pages": [
         "introduction",
-        "quickstart",
         "development"
+      ]},{
+      "group": "Resources",
+      "pages": [
+        "quickstart",
+        "lineBased",
+        "ElementTypes"
       ]
     }
   ],

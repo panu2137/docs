@@ -61,7 +61,7 @@ intersection: function (obj, obj2) {
     }
 ```
 ### Function: intersection_ray_line
->
+>This function we use to calculate the point of intersection between ray and line
 ```java
 intersection_ray_line: (line, ray) => {
         const x4 = ray.p1.x + ray.dir.x
@@ -82,7 +82,7 @@ intersection_ray_line: (line, ray) => {
     }
 ```
 ### Function: intersection_2line
->This function
+>This function we use to calculate the point of intersection between two lines
 ```java
 intersection_2line: (line, line2) => {
 
@@ -129,7 +129,7 @@ intersection_line_circle: (line, ray) => {
     }
 ```
 ### Function: perpendicular_bisector
-> smth
+> This function calculates the perpendicular bisector of line
 ```java
 perpendicular_bisector: function(line) {
         return objectUtils.line(
@@ -145,7 +145,7 @@ perpendicular_bisector: function(line) {
     }
 ```
 ### Function: normalize
-> smth
+> This is a simple function used to normalize the point
 ```java
 normalize(length, p1, p2) {
         const dir = objectUtils.point(p2.x - p1.x, p2.y - p1.y)
@@ -155,7 +155,7 @@ normalize(length, p1, p2) {
     }
 ```
 ### Function: getDirFromAngle
-> smth
+> This function gives us the direction in form of a point from the angle
 ```java
 getDirFromAngle(angle) {
         const radians = angle * (Math.PI / 180);
