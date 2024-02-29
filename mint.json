@@ -26,14 +26,12 @@
       "group": "Getting Started",
       "pages": [
         "introduction",
-        "development",
-        "customObject"
+        "development"
       ]},{
       "group": "Resources",
       "pages": [
         "quickstart",
-        "lineBased",
-        "ElementTypes"
+        "lineBased"
       ]},{
       "group": "Using in own project",
       "pages": [
